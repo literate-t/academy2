@@ -1,55 +1,43 @@
-import { createElement, render } from "./react";
+/* @jsx createElement */
 
-// const vdom = {
-//   tag: "p",
-//   props: {},
-//   children: [
-//     {
-//       tag: "h1",
-//       props: {},
-//       children: ["React 만들기"],
-//     },
-//     {
-//       tag: "ul",
-//       props: {},
-//       children: [
-//         {
-//           tag: "li",
-//           props: {
-//             style: "color: red",
-//           },
-//           children: ["첫 번째 아이템"],
-//         },
-//         {
-//           tag: "li",
-//           props: {
-//             style: "color: blue",
-//           },
-//           children: ["두 번째 아이템"],
-//         },
-//         {
-//           tag: "li",
-//           props: {
-//             style: "color: green",
-//           },
-//           children: ["세 번째 아이템"],
-//         },
-//       ],
-//     },
-//   ],
-// };
+import { createElement, render, Component } from "./react";
 
-const vdom = createElement(
-  "p",
-  {},
-  createElement("h1", {}, "React 만들기"),
-  createElement(
-    "ul",
-    {},
-    createElement("li", { style: "color:red" }, "첫 번째 아이템"),
-    createElement("li", { style: "color:blue" }, "두 번째 아이템"),
-    createElement("li", { style: "color:green" }, "세 번째 아이템")
-  )
+class Title extends Component {
+  render() {
+    return <h1>{this.props.children}</h1>;
+  }
+}
+
+// function Title(props) {
+//   return <h1>{props.children}</h1>;
+// }
+
+function Item(props) {
+  return <li style={`color:${props.color}`}>{props.children}</li>;
+}
+
+// const vdom = (
+//   <p>
+//     <Title>리액트 잘 만들기</Title>
+//     {/* createElement(Title, null, "리액트 잘 만들기") */}
+//     <ul>
+//       <Item color='red'>첫 번째 아이템</Item>
+//       <Item color='green'>두 번째 아이템</Item>
+//       <Item color='blue'>세 번째 아이템</Item>
+//     </ul>
+//   </p>
+// );
+const App = () => (
+  <p>
+    <Title>리액트 컴포넌트 잘 만들기</Title>
+    {/* createElement(Title, null, "리액트 잘 만들기") */}
+    <ul>
+      <Item color='red'>첫 번째 아이템</Item>
+      <Item color='green'>두 번째 아이템</Item>
+      <Item color='blue'>세 번째 아이템</Item>
+    </ul>
+  </p>
 );
-console.log(vdom);
-render(vdom, document.querySelector("#root"));
+
+render(<App />, document.querySelector("#root"));
+console.log(<App />);
